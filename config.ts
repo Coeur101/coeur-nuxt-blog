@@ -8,12 +8,12 @@ export default {
   title: 'coeur', // 网站标题
   nickName: '云与原', // 昵称
   domain: 'https://blog.yunyuyuan.net', // rss域名
-  SEO_title: ' - yunyuyuan blog', // 搜索引擎显示的标题
-  SEO_keywords: "yunyuyuan,yunyuyuan's blog,云与原,云与原的博客", // keywords meta header
+  SEO_title: ' - coeur blog', // 搜索引擎显示的标题
+  SEO_keywords: "coeur,coeur's blog", // keywords meta header
   MSClarityId: '', // Microsoft的Clarity统计，https://clarity.microsoft.com/
   CloudflareAnalyze: '', // cloudflare的统计，https://developers.cloudflare.com/analytics/web-analytics
-  CommentRepoId: '', // https://giscus.app/zh-CN
-  CommentDiscussionCategoryId: '', // https://giscus.app/zh-CN
+  CommentRepoId: 'R_kgDOLgj5Og', // https://giscus.app/zh-CN
+  CommentDiscussionCategoryId: 'DIC_kwDOLgj5Os4CeJyE', // https://giscus.app/zh-CN
 
   Comment: {
     // 是否开启评论，请先设置上面的 CommentRepoId 和 CommentDiscussionCategoryId
