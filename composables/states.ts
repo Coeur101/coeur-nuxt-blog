@@ -1,4 +1,9 @@
-import { GithubTokenKey, I18nCode, I18nStoreKey, toggleCodeBlockTheme } from "~/utils/common";
+import {
+  GithubTokenKey,
+  type I18nCode,
+  I18nStoreKey,
+  toggleCodeBlockTheme
+} from "~/utils/common";
 import { useState } from "#app";
 
 import { getLocalStorage, loadI18nJson, setLocalStorage } from "~/utils/nuxt";
@@ -11,7 +16,8 @@ export const useFirstLoad = () => useState("first-loaded", () => true);
 export const useIsMobile = () => useState("is-mobile", () => false);
 
 export const useGithubToken = () => useState(GithubTokenKey, () => "");
-export const useIsAuthor = () => useState<null | boolean>("is-author", () => null);
+export const useIsAuthor = () =>
+  useState<null | boolean>("is-author", () => null);
 export const useCorrectSha = () => useState("correct-sha", () => "");
 export const useUnsavedContent = () => useState("unsaved-content", () => false);
 export const useThemeMode = () => {
@@ -30,8 +36,11 @@ export const useThemeMode = () => {
 };
 
 export const useI18nCode = () => {
-  const i18nCode = useState<I18nCode>(I18nStoreKey, () => config.defaultLang as any);
-  i18nCode.value = getLocalStorage(I18nStoreKey) || config.defaultLang as any;
+  const i18nCode = useState<I18nCode>(
+    I18nStoreKey,
+    () => config.defaultLang as any
+  );
+  i18nCode.value = getLocalStorage(I18nStoreKey) || (config.defaultLang as any);
   return {
     i18nCode,
     changeI18n: async (code: I18nCode) => {
