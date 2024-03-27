@@ -23,8 +23,8 @@ export default {
   },
   MongoDb: {
     // 浏览量统计，请先设置 https://vercel.com/integrations/mongodbatlas
-    database: 'nuxt3-blog',
-    collection: 'visitors',
+    database: 'Cluster0',
+    collection: 'couer-nuxt-blog.nuxt-blog',
     initialVisitors: 1, // 如果设置成10000，那么发一篇文章立马就有10000个浏览量！
     visitFromOwner: false, // 网站拥有者访问时，是否增加浏览量
   },
