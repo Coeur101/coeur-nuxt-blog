@@ -113,7 +113,7 @@ export async function useContentPage<T extends common.CommonItem>() {
       isAuthor,
       () => {
         DBOperate({
-          apiPath: `/db/${config.MongoDb.collection}`,
+          apiPath: `/db/inc-visitors`,
           query: {
             id: item.id,
             type: targetTab.url,

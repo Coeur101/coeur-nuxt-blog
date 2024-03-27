@@ -2,9 +2,9 @@ import config from "../../../config";
 import type { HeaderTabUrl } from "../../common";
 
 const request = async (path: string, data: any) => {
-  if (!process.env.MONGODB_PWD || !process.env.MONGODB_USER) {
+  /*   if (!process.env.MONGODB_PWD || !process.env.MONGODB_USER) {
     throw new Error("Need Mongodb Atlas Authentication");
-  }
+  } */
 
   const url = process.env.MONGODB_ENDPOINT + path;
   const requestData = {
@@ -18,8 +18,8 @@ const request = async (path: string, data: any) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      email: process.env.MONGODB_USER,
-      password: process.env.MONGODB_PWD
+      email: process.env.MONGODB_USER as string,
+      password: process.env.MONGODB_PWD as string
     },
     body: requestData
   });

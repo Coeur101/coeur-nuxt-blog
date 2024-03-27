@@ -10,7 +10,6 @@ export default defineEventHandler(async (event) => {
   }
   try {
     const args = await readBody(event);
-    console.log(args);
     return await increaseVisitors({
       id: args.id,
       type: args.type,
