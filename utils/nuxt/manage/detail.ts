@@ -1,5 +1,19 @@
-import { createNewItem, type CommonItem, processEncryptDecrypt } from "~/utils/common";
-import { useHasModified, translate, useStatusText, useCurrentTab, deepClone, assignItem, fetchList, fetchMd, useCommonSEOTitle } from "~/utils/nuxt";
+import {
+  createNewItem,
+  type CommonItem,
+  processEncryptDecrypt
+} from "~/utils/common";
+import {
+  useHasModified,
+  translate,
+  useStatusText,
+  useCurrentTab,
+  deepClone,
+  assignItem,
+  fetchList,
+  fetchMd,
+  useCommonSEOTitle
+} from "~/utils/nuxt";
 
 /**
  * 管理页面详情编辑通用功能
@@ -9,7 +23,9 @@ export async function useManageContent<T extends CommonItem> () {
   const itemId = useRoute().params.id as string;
   const targetTab = useCurrentTab();
 
-  useCommonSEOTitle(computed(() => translate("detail-manage", [targetTab.name])));
+  useCommonSEOTitle(
+    computed(() => translate("detail-manage", [targetTab.name]))
+  );
 
   const isNew = itemId === "new";
 
@@ -28,31 +44,47 @@ export async function useManageContent<T extends CommonItem> () {
 
   let list: T[] = [];
 
-  const { hasModified, markdownModified } = useHasModified<T>({ item, origin: originItem });
+  const { hasModified, markdownModified } = useHasModified<T>({
+    item,
+    origin: originItem
+  });
   // 额外加上是否修改提示
-  const { statusText: statusText_, canCommit, processing, toggleProcessing } = useStatusText();
+  const {
+    statusText: statusText_,
+    canCommit,
+    processing,
+    toggleProcessing
+  } = useStatusText();
   const canUpload = computed(() => canCommit.value && hasModified.value);
   const statusText = computed(() => {
     if (item.encrypt && !decrypted.value) {
       return translate("need-decrypt");
     }
-    return statusText_.value || (!hasModified.value ? translate("not-modified") : "");
+    return (
+      statusText_.value || (!hasModified.value ? translate("not-modified") : "")
+    );
   });
 
-  const { hasModified: hasModifiedForDraft, markdownModified: markdownModifiedForDraft } = useHasModified<T>({ item, origin: draftItem });
+  const {
+    hasModified: hasModifiedForDraft,
+    markdownModified: markdownModifiedForDraft
+  } = useHasModified<T>({ item, origin: draftItem });
   // 提示未保存内容
-  watch([hasModified, hasDraft, hasModifiedForDraft], ([modified, hasDraft, draftModified]) => {
-    // 和origin，草稿对得上一个就行了
-    let modified_ = true;
-    if (hasDraft) {
-      if (!modified || !draftModified) {
+  watch(
+    [hasModified, hasDraft, hasModifiedForDraft],
+    ([modified, hasDraft, draftModified]) => {
+      // 和origin，草稿对得上一个就行了
+      let modified_ = true;
+      if (hasDraft) {
+        if (!modified || !draftModified) {
+          modified_ = false;
+        }
+      } else if (!modified) {
         modified_ = false;
       }
-    } else if (!modified) {
-      modified_ = false;
+      useUnsavedContent().value = modified_;
     }
-    useUnsavedContent().value = modified_;
-  });
+  );
 
   // 解密完成 or 上传完成(表面工作)，用来比较是否发生改变的originItem需要更新
   const resetOriginItem = (md?: string) => {
@@ -72,7 +104,10 @@ export async function useManageContent<T extends CommonItem> () {
   list = await fetchList<T>(targetTab.url);
 
   if (!isNew) {
-    assignItem<T>(originItem, deepClone(list.find(item => item.id === Number(itemId))!));
+    assignItem<T>(
+      originItem,
+      deepClone(list.find(item => item.id === Number(itemId))!)
+    );
     assignItem<T>(item, deepClone(originItem));
     // item的内容可以马上解密
     if (item.encrypt) {
@@ -105,7 +140,10 @@ export async function useManageContent<T extends CommonItem> () {
         let newMarkdownContent = markdownContent.value;
         for (const block of item.encryptBlocks!) {
           const { start, end } = block;
-          newMarkdownContent = newMarkdownContent.slice(0, start) + await decrypt(newMarkdownContent.slice(start, end)) + newMarkdownContent.slice(end);
+          newMarkdownContent =
+            newMarkdownContent.slice(0, start) +
+            (await decrypt(newMarkdownContent.slice(start, end))) +
+            newMarkdownContent.slice(end);
         }
         markdownContent.value = newMarkdownContent;
         blockDecrypted.value = true;

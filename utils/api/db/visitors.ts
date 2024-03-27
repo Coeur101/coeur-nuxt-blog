@@ -36,7 +36,15 @@ export async function getVisitors (type: HeaderTabUrl) {
   return res.documents;
 }
 
-export async function increaseVisitors ({ id, type, inc }: {id: number, type: HeaderTabUrl, inc?: boolean}) {
+export async function increaseVisitors ({
+  id,
+  type,
+  inc
+}: {
+  id: number
+  type: HeaderTabUrl
+  inc?: boolean
+}) {
   const preset = {
     nid: id,
     ntype: type
@@ -59,7 +67,9 @@ export async function increaseVisitors ({ id, type, inc }: {id: number, type: He
     });
     return config.MongoDb.initialVisitors;
   }
-  return (await request("/action/findOne", {
-    filter: preset
-  })).document.nvisitors;
+  return (
+    await request("/action/findOne", {
+      filter: preset
+    })
+  ).document.nvisitors;
 }
