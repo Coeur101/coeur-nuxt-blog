@@ -33,5 +33,5 @@ if (uri) {
 
 export async function getCollection<T extends Document>() {
   const client = await clientPromise
-  return client.db('admin').collection<T>('visitors')
+  return client.db('couer-nuxt-blog').collection<T>('nuxt-blog')
 }
