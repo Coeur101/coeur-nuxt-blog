@@ -11,11 +11,15 @@ const articlesList = await useListPage<ArticleItem>();
 
 const articleTagList = new Set<string>();
 
-watch(articlesList, () => {
-  articlesList.forEach((item) => {
-    item.tags.forEach(v => articleTagList.add(v));
-  });
-}, { immediate: true });
+watch(
+  articlesList,
+  () => {
+    articlesList.forEach((item) => {
+      item.tags.forEach(v => articleTagList.add(v));
+    });
+  },
+  { immediate: true }
+);
 
 const tags = computed<string[]>(() => {
   try {
@@ -50,7 +54,7 @@ const toggleTags = (tag: string) => {
       <div class="tags flex">
         <the-tag
           v-for="tag in articleTagList"
-          :key="tag+hackKey"
+          :key="tag + hackKey"
           :active="tags.includes(tag)"
           @click="toggleTags(tag)"
         >
@@ -72,7 +76,11 @@ const toggleTags = (tag: string) => {
               }}</span>
               <b />
               <span>{{ item.len }} {{ $t('words-num') }}</span>
-              <span v-if="Number(item.visitors) >= 0" class="visitors flex" :title="$t('visit-time', [item.visitors])">
+              <span
+                v-if="Number(item.visitors) >= 0"
+                class="visitors flex"
+                :title="$t('visit-time', [item.visitors])"
+              >
                 <svg-icon name="view" />
                 {{ item.visitors }}
               </span>

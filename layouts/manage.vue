@@ -2,7 +2,16 @@
 import SvgIcon from "~/components/svg-icon.vue";
 import NuxtLink from "~/node_modules/nuxt/dist/app/components/nuxt-link";
 import UploadImage from "~/pages/manage/comps/upload-image.vue";
-import { rmLocalStorage, setLocalStorage, translateT, isAuthor, notify, translate, isDev, calcRocketUrl } from "~/utils/nuxt";
+import {
+  rmLocalStorage,
+  setLocalStorage,
+  translateT,
+  isAuthor,
+  notify,
+  translate,
+  isDev,
+  calcRocketUrl
+} from "~/utils/nuxt";
 import { GithubTokenKey, HeaderTabs } from "~/utils/common";
 
 const pageLoading = useLoading();
@@ -38,35 +47,48 @@ const ManageMenu = defineComponent({
     <div class="manage-menu w100 flexc">
       <ul>
         <li>
-          <a class="upload-img-btn" onClick={() => { showUploadImage.value = true; }}>
-            { translateT("images") }
+          <a
+            class="upload-img-btn"
+            onClick={() => {
+              showUploadImage.value = true;
+            }}
+          >
+            {translateT("images")}
           </a>
         </li>
         <li>
           <nuxt-link
-            to='/manage/config'
+            to="/manage/config"
             class={{ active: activeRoute.value.startsWith("/config") }}
           >
-            { translateT("config") }
+            {translateT("config")}
           </nuxt-link>
         </li>
-        {
-          HeaderTabs.map(tab => (
-            <li key={tab.url}>
-              <nuxt-link
-                to={"/manage" + tab.url}
-                class={{ active: activeRoute.value.startsWith(tab.url) }}
-              >
-                <span>{ translateT(tab.name) }</span>
-              </nuxt-link>
-            </li>
-          ))
-        }
+        {HeaderTabs.map(tab => (
+          <li key={tab.url}>
+            <nuxt-link
+              to={"/manage" + tab.url}
+              class={{ active: activeRoute.value.startsWith(tab.url) }}
+            >
+              <span>{translateT(tab.name)}</span>
+            </nuxt-link>
+          </li>
+        ))}
       </ul>
       <div
-        title={(!useCorrectSha().value || useNuxtApp().$sameSha.value) ? (allPassed.value ? translate("all-verified") : translate("token-and-passwd")) : translate("commit-id-not-correct")}
-        class={{ warning: useCorrectSha().value && !useNuxtApp().$sameSha.value }}
-        onClick={() => { showModal.value = true; }}
+        title={
+          !useCorrectSha().value || useNuxtApp().$sameSha.value
+            ? allPassed.value
+              ? translate("all-verified")
+              : translate("token-and-passwd")
+            : translate("commit-id-not-correct")
+        }
+        class={{
+          warning: useCorrectSha().value && !useNuxtApp().$sameSha.value
+        }}
+        onClick={() => {
+          showModal.value = true;
+        }}
       >
         <svg-icon
           class={{ invalid: !githubToken.value, active: allPassed.value }}
@@ -76,19 +98,18 @@ const ManageMenu = defineComponent({
       <nuxt-link title="🚀" to={travel.value}>
         <svg-icon name="rocket" />
       </nuxt-link>
-      {
-        isDev &&
-      <nuxt-link title="svgs" to="/manage/all-svg" target="_blank">
-        SVG
-      </nuxt-link>
-      }
-      {
-        (pageLoading.loadingState.value && !isMobile.value)
-          ? <div>
-            <svg-icon name="loading"/>
+      {isDev && (
+        <nuxt-link title="svgs" to="/manage/all-svg" target="_blank">
+          SVG
+        </nuxt-link>
+      )}
+      {pageLoading.loadingState.value && !isMobile.value
+        ? (
+          <div>
+            <svg-icon name="loading" />
           </div>
-          : null
-      }
+        )
+        : null}
     </div>
   )
 });
@@ -128,7 +149,9 @@ const modalOk = () => {
   isAuthor(inputToken.value)
     .then((res) => {
       notify({
-        title: res ? translate("token-verified") : translate("token-unverified"),
+        title: res
+          ? translate("token-verified")
+          : translate("token-unverified"),
         type: res ? "success" : "error",
         description: res ? translate("token-saved") : undefined
       });
@@ -186,7 +209,12 @@ const modalOk = () => {
         <b>Github Token
           <svg-icon v-if="!!githubToken" name="correct" />
         </b>
-        <input v-model="inputToken" :placeholder="$t('please-input')" data-focus :disabled="isDev">
+        <input
+          v-model="inputToken"
+          :placeholder="$t('please-input')"
+          data-focus
+          :disabled="isDev"
+        >
       </label>
       <label class="manage-input-pwd">
         <b>
@@ -213,7 +241,7 @@ $menu-width: 120px;
     z-index: 3;
     width: $menu-width - $padding-left;
 
-    >.mobile-menu-toggler {
+    > .mobile-menu-toggler {
       display: none;
     }
 
@@ -374,10 +402,10 @@ $menu-width: 120px;
     }
   }
 
-  >.loading {
+  > .loading {
     margin-top: 20px;
 
-    >svg {
+    > svg {
       fill: $theme-color;
 
       @include square(40px);
@@ -419,11 +447,11 @@ $menu-width: 120px;
       top: 48px;
       left: 2%;
 
-      >div > .loading {
+      > div > .loading {
         display: none;
       }
 
-      >.mobile-menu-toggler {
+      > .mobile-menu-toggler {
         display: flex;
         background: white;
         position: absolute;
@@ -434,7 +462,7 @@ $menu-width: 120px;
         box-shadow: 0 0 10px rgb(0 0 0 / 30%);
         opacity: 0.8;
 
-        >svg {
+        > svg {
           @include square(36px);
 
           fill: #0087ff;

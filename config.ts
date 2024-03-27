@@ -6,8 +6,8 @@ export default {
   /** -------------------------------------------------以下可选修改----------------------------------------------------- */
 
   title: 'coeur', // 网站标题
-  nickName: '云与原', // 昵称
-  domain: 'https://blog.yunyuyuan.net', // rss域名
+  nickName: 'couer', // 昵称
+  domain: '', // rss域名
   SEO_title: ' - coeur blog', // 搜索引擎显示的标题
   SEO_keywords: "coeur,coeur's blog", // keywords meta header
   MSClarityId: '', // Microsoft的Clarity统计，https://clarity.microsoft.com/

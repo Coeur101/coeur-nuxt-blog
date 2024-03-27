@@ -45,7 +45,9 @@ export const useEncryptor = () => {
     }
     try {
       await init();
-      const result = CryptoJS.AES.decrypt(s, usePasswd.value).toString(CryptoJS.enc.Utf8);
+      const result = CryptoJS.AES.decrypt(s, usePasswd.value).toString(
+        CryptoJS.enc.Utf8
+      );
       if (result) {
         passwdCorrect.value = true;
         return result;

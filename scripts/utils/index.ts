@@ -1,16 +1,19 @@
 import cmd from "child_process";
 import path from "path";
 import colors from "colors";
-import prompts, { PromptObject } from "prompts";
+import prompts, { type PromptObject } from "prompts";
 
-export async function promptTask<const T extends PromptObject & {name: string}> (params: T[], cb: (_: Record<T["name"], any>) => any|Promise<any>) {
+export async function promptTask<
+  const T extends PromptObject & { name: string }
+> (params: T[], cb: (_: Record<T["name"], any>) => any | Promise<any>) {
   let canceled = false;
-  const response = await prompts(params, {
+
+  const response = (await prompts(params, {
     onCancel: () => {
       console.log(colors.red("Program canceled"));
       canceled = true;
     }
-  }) as any;
+  })) as any;
 
   if (!canceled) {
     await cb(response);
@@ -27,15 +30,21 @@ export function getRebuildPath (...s: string[]) {
 
 export async function runCmd (command: string) {
   return await new Promise<void>((resolve, reject) => {
-    cmd.exec(command, {
-      maxBuffer: 1024 * 1024 * 5
-    }, (err) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve();
-      }
-    }).stdout?.pipe(process.stdout);
+    cmd
+      .exec(
+        command,
+        {
+          maxBuffer: 1024 * 1024 * 5
+        },
+        (err) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve();
+          }
+        }
+      )
+      .stdout?.pipe(process.stdout);
   });
 }
 
@@ -44,10 +53,13 @@ export function nbLog (s: string, head = "generate") {
   console.log(`[${colors.blue.bold(head)}] ${colors.green(s)}`);
 }
 
-export type ImgMap = Record<string, {
-  newUrl: string,
-  appearIn: string[]
-}>
+export type ImgMap = Record<
+  string,
+  {
+    newUrl: string
+    appearIn: string[]
+  }
+>
 
 export * from "./encrypt";
 export * from "./rss";
