@@ -99,14 +99,7 @@ export default defineNuxtConfig({
       cmtRepId: config.CommentRepoId || process.env.CommentRepoId,
       cmtRepCateId:
         config.CommentDiscussionCategoryId ||
-        process.env.CommentDiscussionCategoryId,
-      MONGODB_URI:
-        "mongodb+srv://vercel-admin-user-6600cddedeac7159d5bdf1ea:RAupBd41OqzXbZpl@cluster0.9c5yp1a.mongodb.net/couer-nuxt-blog?retryWrites=true&w=majority",
-      MONGODB_USER: "coeur7170@gmail.com",
-      MONGODB_PASS: "baihailong123",
-      MONGODB_ENDPOINT:
-        "https://data.mongodb-api.com/app/data-aybhc/endpoint/data/v1",
-      MONGODB_DATA_SOURCE: "cluster0.9c5yp1a.mongodb.net"
+        process.env.CommentDiscussionCategoryId
     }
   },
   nitro: {

@@ -2,16 +2,16 @@ import config from "../../../config";
 import type { HeaderTabUrl } from "../../common";
 
 const request = async (path: string, data: any) => {
-  const { MONGODB_PWD, MONGODB_USER, MONGODB_ENDPOINT, MONGODB_DATA_SOURCE } =
-    useRuntimeConfig().app;
-  if (!MONGODB_PWD || !MONGODB_USER) {
-    throw new Error("Need Mongodb Atlas Authentication密码" + MONGODB_PWD);
+  if (!config.MongoDb.MONGODB_PASS || !config.MongoDb.MONGODB_USER) {
+    throw new Error(
+      "Need Mongodb Atlas Authentication密码" + config.MongoDb.MONGODB_PASS
+    );
   }
 
-  const url = MONGODB_ENDPOINT + path;
+  const url = config.MongoDb.MONGODB_ENDPOINT + path;
   const requestData = {
     ...data,
-    dataSource: MONGODB_DATA_SOURCE,
+    dataSource: config.MongoDb.MONGODB_DATA_SOURCE,
     database: config.MongoDb.database,
     collection: config.MongoDb.collection
   };
@@ -20,8 +20,8 @@ const request = async (path: string, data: any) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      email: MONGODB_USER as string,
-      password: MONGODB_PWD as string
+      email: config.MongoDb.MONGODB_USER as string,
+      password: config.MongoDb.MONGODB_PASS as string
     },
     body: requestData
   });

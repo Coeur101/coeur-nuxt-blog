@@ -27,6 +27,13 @@ export default {
     collection: 'nuxt-blog',
     initialVisitors: 1, // 如果设置成10000，那么发一篇文章立马就有10000个浏览量！
     visitFromOwner: false, // 网站拥有者访问时，是否增加浏览量
+    MONGODB_URI:
+      'mongodb+srv://vercel-admin-user-6600cddedeac7159d5bdf1ea:RAupBd41OqzXbZpl@cluster0.9c5yp1a.mongodb.net/couer-nuxt-blog?retryWrites=true&w=majority',
+    MONGODB_USER: 'coeur7170@gmail.com',
+    MONGODB_PASS: 'baihailong123',
+    MONGODB_ENDPOINT:
+      'https://data.mongodb-api.com/app/data-aybhc/endpoint/data/v1',
+    MONGODB_DATA_SOURCE: 'cluster0.9c5yp1a.mongodb.net',
   },
   themeColor: '#2aa0bb', // 主题色
   defaultLang: 'zh', // default language, "zh" and "en" are supported currently
