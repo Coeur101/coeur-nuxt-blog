@@ -99,7 +99,12 @@ export default defineNuxtConfig({
       cmtRepId: config.CommentRepoId || process.env.CommentRepoId,
       cmtRepCateId:
         config.CommentDiscussionCategoryId ||
-        process.env.CommentDiscussionCategoryId
+        process.env.CommentDiscussionCategoryId,
+      MONGODB_URI: process.env.MONGODB_URI,
+      MONGODB_USER: process.env.MONGODB_USER,
+      MONGODB_PASS: process.env.MONGODB_PASS,
+      MONGODB_ENDPOINT: process.env.MONGODB_ENDPOINT,
+      MONGODB_DATA_SOURCE: process.env.MONGODB_DATA_SOURCE
     }
   },
   nitro: {
