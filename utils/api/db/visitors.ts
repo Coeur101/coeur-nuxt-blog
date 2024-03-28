@@ -2,9 +2,11 @@ import config from "../../../config";
 import type { HeaderTabUrl } from "../../common";
 
 const request = async (path: string, data: any) => {
-  /*   if (!process.env.MONGODB_PWD || !process.env.MONGODB_USER) {
-    throw new Error("Need Mongodb Atlas Authentication");
-  } */
+  if (!process.env.MONGODB_PWD || !process.env.MONGODB_USER) {
+    throw new Error(
+      "Need Mongodb Atlas Authentication密码" + process.env.MONGODB_PWD
+    );
+  }
 
   const url = process.env.MONGODB_ENDPOINT + path;
   const requestData = {
