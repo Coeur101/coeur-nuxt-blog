@@ -17,7 +17,9 @@ fs.readdirSync("./public/sticker").forEach((dir) => {
 });
 
 // svgs
-const svgs = fs.readdirSync("./assets/svg").map(file => file.replace(/\.svg$/, ""));
+const svgs = fs
+  .readdirSync("./assets/svg")
+  .map(file => file.replace(/\.svg$/, ""));
 
 const scripts = [];
 const cfAnalyzeId = config.CloudflareAnalyze || process.env.CloudflareAnalyze;
@@ -66,19 +68,22 @@ export default defineNuxtConfig({
         { charset: "utf-8" },
         {
           name: "viewport",
-          content: "width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+          content:
+            "width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
         },
         { name: "keywords", content: config.SEO_keywords },
         { name: "author", content: config.nickName }
       ],
-      link: [
-        { rel: "shortcut icon", href: "/icon.png" }
-      ],
+      link: [{ rel: "shortcut icon", href: "/icon.png" }],
       script: scripts,
       title: config.title
     }
   },
-  css: ["~/assets/style/main.scss", "~/node_modules/katex/dist/katex.min.css", "~/node_modules/viewerjs/dist/viewer.css"],
+  css: [
+    "~/assets/style/main.scss",
+    "~/node_modules/katex/dist/katex.min.css",
+    "~/node_modules/viewerjs/dist/viewer.css"
+  ],
   runtimeConfig: {
     public: {
       stickers,
@@ -86,11 +91,15 @@ export default defineNuxtConfig({
       timestamp
     },
     app: {
-      NUXT_ENV_CURRENT_GIT_SHA: execSync("git rev-parse HEAD").toString().trim(),
+      NUXT_ENV_CURRENT_GIT_SHA: execSync("git rev-parse HEAD")
+        .toString()
+        .trim(),
       githubBranch,
       mongoDBEnabled: !!process.env.MONGODB_URI || !!process.env.MONGODB_USER,
       cmtRepId: config.CommentRepoId || process.env.CommentRepoId,
-      cmtRepCateId: config.CommentDiscussionCategoryId || process.env.CommentDiscussionCategoryId
+      cmtRepCateId:
+        config.CommentDiscussionCategoryId ||
+        process.env.CommentDiscussionCategoryId
     }
   },
   nitro: {
@@ -142,7 +151,10 @@ export default defineNuxtConfig({
       const apiPath = path.join(__dirname, "utils", "api");
       if (["node-server"].includes(nitro.options.preset)) {
         for (const file of fs.readdirSync(path.join(apiPath, "db-tcp"))) {
-          fs.renameSync(path.join(apiPath, "db-tcp", file), path.join(apiPath, "db", file));
+          fs.renameSync(
+            path.join(apiPath, "db-tcp", file),
+            path.join(apiPath, "db", file)
+          );
         }
       }
     },
