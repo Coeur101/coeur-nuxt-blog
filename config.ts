@@ -23,17 +23,17 @@ export default {
   },
   MongoDb: {
     // 浏览量统计，请先设置 https://vercel.com/integrations/mongodbatlas
-    database: 'couer-nuxt-blog',
-    collection: 'nuxt-blog',
+    database: 'couer-nuxt-blog', // 数据库
+    collection: 'nuxt-blog', // 数据库下的收藏，都在mongoDB的控制台中设置
     initialVisitors: 1, // 如果设置成10000，那么发一篇文章立马就有10000个浏览量！
     visitFromOwner: false, // 网站拥有者访问时，是否增加浏览量
     MONGODB_URI:
-      'mongodb+srv://vercel-admin-user-6600cddedeac7159d5bdf1ea:RAupBd41OqzXbZpl@cluster0.9c5yp1a.mongodb.net/couer-nuxt-blog?retryWrites=true&w=majority',
-    MONGODB_USER: 'coeur7170@gmail.com',
-    MONGODB_PASS: 'baihailong123',
+      'mongodb+srv://vercel-admin-user-6600cddedeac7159d5bdf1ea:RAupBd41OqzXbZpl@cluster0.9c5yp1a.mongodb.net/couer-nuxt-blog?retryWrites=true&w=majority', // 连接mongoDB的链接
+    MONGODB_USER: 'coeur7170@gmail.com', // 配置访问mongoDb的邮箱
+    MONGODB_PASS: 'baihailong123', // 配置访问mongoDb 的密码
     MONGODB_ENDPOINT:
-      'https://data.mongodb-api.com/app/data-aybhc/endpoint/data/v1',
-    MONGODB_DATA_SOURCE: 'cluster0.9c5yp1a.mongodb.net',
+      'https://data.mongodb-api.com/app/data-aybhc/endpoint/data/v1', // mongoDB API
+    MONGODB_DATA_SOURCE: 'Cluster0', // 集群
   },
   themeColor: '#2aa0bb', // 主题色
   defaultLang: 'zh', // default language, "zh" and "en" are supported currently

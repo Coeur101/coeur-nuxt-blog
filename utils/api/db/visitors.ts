@@ -3,9 +3,7 @@ import type { HeaderTabUrl } from "../../common";
 
 const request = async (path: string, data: any) => {
   if (!config.MongoDb.MONGODB_PASS || !config.MongoDb.MONGODB_USER) {
-    throw new Error(
-      "Need Mongodb Atlas Authentication密码" + config.MongoDb.MONGODB_PASS
-    );
+    throw new Error("Need Mongodb Atlas Authentication");
   }
 
   const url = config.MongoDb.MONGODB_ENDPOINT + path;
