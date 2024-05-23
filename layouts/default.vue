@@ -1,8 +1,19 @@
 <script setup lang="tsx">
 import type Headroom from "headroom.js";
 import NuxtLink from "~/node_modules/nuxt/dist/app/components/nuxt-link";
-import { inBrowser, isPrerender, calcRocketUrl, translateT, useHackKey } from "~/utils/nuxt";
-import { i18nLocales, githubRepoUrl, type I18nCode, HeaderTabs } from "~/utils/common";
+import {
+  inBrowser,
+  isPrerender,
+  calcRocketUrl,
+  translateT,
+  useHackKey
+} from "~/utils/nuxt";
+import {
+  i18nLocales,
+  githubRepoUrl,
+  type I18nCode,
+  HeaderTabs
+} from "~/utils/common";
 import config from "~/config";
 
 const hackKey = useHackKey();
@@ -28,24 +39,26 @@ const LayoutMenu = defineComponent({
   components: {
     "nuxt-link": NuxtLink
   },
-  render: () =>
+  render: () => (
     <div class={`layout-menu flex ${isMobile.value ? "in-mobile" : ""}`}>
-      {
-        HeaderTabs.map(item => (
-          <nuxt-link
-            key={item.url}
-            class={{ item: true, active: activeRoute.value === item.url.substring(1) }}
-            to={item.url}
-          >
-            { translateT(item.name) }
-            <span />
-            <span />
-            <span />
-            <span />
-          </nuxt-link>
-        ))
-      }
+      {HeaderTabs.map(item => (
+        <nuxt-link
+          key={item.url}
+          class={{
+            item: true,
+            active: activeRoute.value === item.url.substring(1)
+          }}
+          to={item.url}
+        >
+          {translateT(item.name)}
+          <span />
+          <span />
+          <span />
+          <span />
+        </nuxt-link>
+      ))}
     </div>
+  )
 });
 
 const showI18n = ref<boolean>(false);
@@ -87,11 +100,19 @@ const isFirst = ref(true);
 </script>
 
 <template>
-  <div id="default-layout" :class="{'in-about': inAbout}">
-    <div v-if="!isPrerender" class="mode-bg" :class="[themeMode, {active: !isFirst}]" />
+  <div id="default-layout" :class="{ 'in-about': inAbout }">
+    <div
+      v-if="!isPrerender"
+      class="mode-bg"
+      :class="[themeMode, { active: !isFirst }]"
+    />
     <nav id="header" ref="headerRef" class="flex w100">
       <del class="space-left" />
-      <span class="mobile-menu-toggler" :class="{active: menuShow}" @click="menuShow = true">
+      <span
+        class="mobile-menu-toggler"
+        :class="{ active: menuShow }"
+        @click="menuShow = true"
+      >
         <svg-icon name="menu" />
       </span>
       <layout-menu v-show="!isMobile" />
@@ -108,7 +129,7 @@ const isFirst = ref(true);
             <div
               v-for="locale of i18nLocales"
               :key="locale.code + hackKey"
-              :class="{ active: i18nCode===locale.code}"
+              :class="{ active: i18nCode === locale.code }"
               @click="setLocale(locale.code)"
             >
               {{ locale.name }}
@@ -121,7 +142,11 @@ const isFirst = ref(true);
         v-if="!isPrerender"
         class="mode"
         :class="themeMode"
-        :title="$t('switch-mode', [$t(`mode-${themeMode === 'light' ? 'dark' : 'light'}`)])"
+        :title="
+          $t('switch-mode', [
+            $t(`mode-${themeMode === 'light' ? 'dark' : 'light'}`),
+          ])
+        "
         @click="toggleTheme"
       >
         <span>
@@ -143,31 +168,60 @@ const isFirst = ref(true);
         <nuxt-link :to="openEdit" title="🚀">
           <svg-icon name="rocket" />
         </nuxt-link>
-        <div class="pwd flex" :class="{valid: encryptor.passwdCorrect.value}" :title="$t('passwd')" @click="showPwdModal = true">
+        <div
+          class="pwd flex"
+          :class="{ valid: encryptor.passwdCorrect.value }"
+          :title="$t('passwd')"
+          @click="showPwdModal = true"
+        >
           <svg-icon name="password" />
         </div>
       </div>
       <sub />
-      <nuxt-link class="about" :to="inAbout ? '/' : '/about'" :title="$t('about')">
+      <nuxt-link
+        class="about"
+        :to="inAbout ? '/' : '/about'"
+        :title="$t('about')"
+      >
         <img class="s100" src="/icon.png" :alt="$t('avatar')">
       </nuxt-link>
     </nav>
-    <span v-show="!!pageLoading.loadingState.value" class="loading" :style="{width: `${pageLoading.loadingState.value}%`}" />
+    <span
+      v-show="!!pageLoading.loadingState.value"
+      class="loading"
+      :style="{ width: `${pageLoading.loadingState.value}%` }"
+    />
     <section id="body">
       <slot />
     </section>
     <footer id="footer" class="flex w100">
       <div class="middle flexc">
-        <span>Copyright (c) 2019-2024 <b><a target="_blank" :href="'https://github.com/'+config.githubName">{{ config.nickName }}</a> | {{ footerDomain }}</b></span>
-        <span class="flex"><a class="rss" target="_blank" href="/sitemap.xml" title="rss">RSS <svg-icon name="rss" /></a>| Powered By <a class="nuxt" href="https://github.com/yunyuyuan/nuxt3-blog" target="_blank">nuxt3-blog</a></span>
+        <span>Copyright (c) 2024-{{ new Date().getFullYear() }}
+          <b><a
+            target="_blank"
+            :href="'https://github.com/' + config.githubName"
+          >{{ config.nickName }}</a>
+            | {{ footerDomain }}</b></span>
+        <!-- <span class="flex"><a class="rss" target="_blank" href="/sitemap.xml" title="rss">RSS <svg-icon name="rss" /></a>| Powered By <a class="nuxt" href="https://github.com/yunyuyuan/nuxt3-blog" target="_blank">nuxt3-blog</a></span> -->
       </div>
     </footer>
-    <common-modal v-model="showPwdModal" @confirm="encryptor.usePasswd.value = inputPwd;showPwdModal = false">
+    <common-modal
+      v-model="showPwdModal"
+      @confirm="
+        encryptor.usePasswd.value = inputPwd
+        showPwdModal = false
+      "
+    >
       <template #title>
         {{ $T('passwd') }}
       </template>
       <template #body>
-        <input v-model="inputPwd" data-focus :placeholder="$t('input-passwd')" style="font-size: 16px;padding: 5px;width: calc(100% - 12px);">
+        <input
+          v-model="inputPwd"
+          data-focus
+          :placeholder="$t('input-passwd')"
+          style="font-size: 16px; padding: 5px; width: calc(100% - 12px)"
+        >
       </template>
     </common-modal>
   </div>
@@ -206,7 +260,7 @@ const isFirst = ref(true);
     }
   }
 
-  >.mode-bg {
+  > .mode-bg {
     position: fixed;
     z-index: $z-index-mode-bg;
     width: 0;
@@ -231,7 +285,7 @@ const isFirst = ref(true);
     }
   }
 
-  >.loading {
+  > .loading {
     position: fixed;
     left: 0;
     top: 0;
@@ -438,7 +492,7 @@ const isFirst = ref(true);
     display: flex;
     justify-content: center;
 
-    >a {
+    > a {
       height: 100%;
     }
 
@@ -640,5 +694,4 @@ const isFirst = ref(true);
     }
   }
 }
-
 </style>
