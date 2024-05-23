@@ -23,6 +23,7 @@ watch(isMobile, () => {
     menuShow.value = false;
   });
 });
+const year = new Date().getFullYear();
 const LayoutMenu = defineComponent({
   // XXX why need?
   components: {
@@ -158,8 +159,8 @@ const isFirst = ref(true);
     </section>
     <footer id="footer" class="flex w100">
       <div class="middle flexc">
-        <span>Copyright (c) 2019-2024 <b><a target="_blank" :href="'https://github.com/'+config.githubName">{{ config.nickName }}</a> | {{ footerDomain }}</b></span>
-        <span class="flex"><a class="rss" target="_blank" href="/sitemap.xml" title="rss">RSS <svg-icon name="rss" /></a>| Powered By <a class="nuxt" href="https://github.com/yunyuyuan/nuxt3-blog" target="_blank">nuxt3-blog</a></span>
+        <span>Copyright (c) 2024-{{ year }} <b><a target="_blank" :href="'https://github.com/'+config.githubName">{{ config.nickName }}</a> | {{ footerDomain }}</b></span>
+        <!-- <span class="flex"><a class="rss" target="_blank" href="/sitemap.xml" title="rss">RSS <svg-icon name="rss" /></a>| Powered By <a class="nuxt" href="https://github.com/yunyuyuan/nuxt3-blog" target="_blank">nuxt3-blog</a></span> -->
       </div>
     </footer>
     <common-modal v-model="showPwdModal" @confirm="encryptor.usePasswd.value = inputPwd;showPwdModal = false">
