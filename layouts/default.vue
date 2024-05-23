@@ -220,7 +220,7 @@ const isFirst = ref(true);
           v-model="inputPwd"
           data-focus
           :placeholder="$t('input-passwd')"
-          style="font-size: 16px; padding: 5px; width: calc(100% - 12px)"
+          style="font-size: 16px; padding: 5px; width: calc(100% - 12px);"
         >
       </template>
     </common-modal>
