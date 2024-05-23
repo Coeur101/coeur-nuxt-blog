@@ -21,6 +21,7 @@ const { i18nCode, changeI18n } = useI18nCode();
 const { themeMode, toggleThemeMode } = useThemeMode();
 const pageLoading = useLoading();
 const route = useRoute();
+const year = new Date().getFullYear();
 const activeRoute = computed(() => {
   return route.path.split("/")[1] || HeaderTabs[0].url.substring(1);
 });
@@ -196,7 +197,7 @@ const isFirst = ref(true);
     </section>
     <footer id="footer" class="flex w100">
       <div class="middle flexc">
-        <span>Copyright (c) 2024-{{ new Date().getFullYear() }}
+        <span>Copyright (c) 2024-{{ year }}
           <b><a
             target="_blank"
             :href="'https://github.com/' + config.githubName"
