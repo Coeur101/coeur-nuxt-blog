@@ -1,20 +1,19 @@
 <script setup lang="ts">
 import { isDev, isPrerender, translateT, useCommonSEOTitle } from "~/utils/nuxt";
-import bg from "~/assets/image/outerwilds.jpg";
-import config from "~/config";
+// import config from "~/config";
 
 useCommonSEOTitle(computed(() => translateT("about")));
 
-const commitSha = computed(() => useRuntimeConfig().app.NUXT_ENV_CURRENT_GIT_SHA);
-const commitUrl = computed(() => `https://github.com/${config.githubName}/${config.githubRepo}/commit/${commitSha.value}`);
+// const commitSha = computed(() => useRuntimeConfig().app.NUXT_ENV_CURRENT_GIT_SHA);
+// const commitUrl = computed(() => `https://github.com/${config.githubName}/${config.githubRepo}/commit/${commitSha.value}`);
 const buildTime = ref<string>("$(inject:timestamp)");
 
 const paragraphs = [
-  "幽深宇宙已岁逾百亿，惟闪烁星光点缀生机",
-  "我常仰望浩瀚天际，思念在同一颗星球的你",
-  "想，那转瞬的迷人流星，也许就是你的回眸",
-  "光坠之地，吾之忧祈",
-  "——2021.12.4"
+  "关于一个",
+  "垃圾前端的故事",
+  "想学习：Nodejs、nestjs、docker、微前端",
+  "希望能够坚持下去",
+  "——2024.05.29"
 ];
 
 onBeforeMount(async () => {
@@ -26,16 +25,16 @@ onBeforeMount(async () => {
 
 <template>
   <div class="about flexc">
-    <img :src="bg" alt="bg">
+    <img src="https://api.vvhan.com/api/bing" alt="bg">
     <div class="flexc paragraphs">
-      <p v-for="p,idx in paragraphs" :key="idx">
+      <p v-for="p, idx in paragraphs" :key="idx">
         {{ p }}
       </p>
     </div>
-    <div class="status">
+    <!-- <div class="status">
       Last built &lt;<a target="_blank" :href="commitUrl">{{ commitSha.substring(0, 8) }}</a>&gt; succeeded at
       <time>{{ buildTime }}</time>
-    </div>
+    </div> -->
   </div>
 </template>
 
