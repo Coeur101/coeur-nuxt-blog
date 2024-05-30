@@ -3,10 +3,7 @@ import { initScrollTrigger, SvgContainerId, NotificationContainerId, ModalContai
 export default defineNuxtPlugin((_app: any) => {
   initScrollTrigger();
   // init theme
-  document.body.setAttribute(
-    "code-theme",
-    localStorage.getItem("code-theme") || "light"
-  );
+  document.body.setAttribute("code-theme", localStorage.getItem("code-theme") || "light");
   document.documentElement.classList.add(`${useThemeMode().themeMode.value}-mode`);
 
   const fragment = new DocumentFragment();
@@ -22,10 +19,7 @@ export default defineNuxtPlugin((_app: any) => {
   const svgContainer = document.createElement("div");
   svgContainer.id = SvgContainerId;
   svgContainer.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-  svgContainer.setAttribute(
-    "style",
-    "position: absolute; width: 0; height: 0;overflow: hidden"
-  );
+  svgContainer.setAttribute("style", "position: absolute; width: 0; height: 0;overflow: hidden");
   fragment.appendChild(svgContainer);
 
   document.body.appendChild(fragment);

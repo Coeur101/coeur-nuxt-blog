@@ -24,15 +24,15 @@
 // import HtmlWorker from "monaco-editor/esm/vs/language/html/html.worker?worker";
 
 export default defineNuxtPlugin(() => {
-// // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// // @ts-ignore
-//   window.MonacoEnvironment = {
-//     getWorker (_: string, label: string) {
-//       if (label === "typescript" || label === "javascript") { return new TsWorker(); }
-//       if (label === "json") { return new JsonWorker(); }
-//       if (label === "css") { return new CssWorker(); }
-//       if (label === "html") { return new HtmlWorker(); }
-//       return new EditorWorker();
-//     }
-//   };
+  // // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // // @ts-ignore
+  //   window.MonacoEnvironment = {
+  //     getWorker (_: string, label: string) {
+  //       if (label === "typescript" || label === "javascript") { return new TsWorker(); }
+  //       if (label === "json") { return new JsonWorker(); }
+  //       if (label === "css") { return new CssWorker(); }
+  //       if (label === "html") { return new HtmlWorker(); }
+  //       return new EditorWorker();
+  //     }
+  //   };
 });

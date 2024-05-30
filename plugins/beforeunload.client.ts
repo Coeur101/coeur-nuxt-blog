@@ -7,12 +7,16 @@ export default defineNuxtPlugin(() => {
       return translateT("confirm-leave");
     }
   };
-  addRouteMiddleware("unload", () => {
-    if (unSavedContent.value) {
-      if (!confirm(translateT("confirm-leave"))) {
-        return abortNavigation();
+  addRouteMiddleware(
+    "unload",
+    () => {
+      if (unSavedContent.value) {
+        if (!confirm(translateT("confirm-leave"))) {
+          return abortNavigation();
+        }
+        unSavedContent.value = false;
       }
-      unSavedContent.value = false;
-    }
-  }, { global: true });
+    },
+    { global: true }
+  );
 });
